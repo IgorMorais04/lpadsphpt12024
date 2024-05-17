@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/04/2024 às 01:52
+-- Tempo de geração: 19/04/2024 às 01:51
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `laboratorio`
 --
-CREATE DATABASE IF NOT EXISTS `laboratorio` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `laboratorio` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `laboratorio`;
 
 -- --------------------------------------------------------
@@ -29,7 +29,6 @@ USE `laboratorio`;
 -- Estrutura para tabela `departamento`
 --
 
-DROP TABLE IF EXISTS `departamento`;
 CREATE TABLE `departamento` (
   `id` int(11) NOT NULL,
   `descricao` varchar(35) NOT NULL
@@ -40,7 +39,7 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`id`, `descricao`) VALUES
-(1, 'informatica'),
+(1, 'Informática'),
 (2, 'Administrativo');
 
 -- --------------------------------------------------------
@@ -49,7 +48,6 @@ INSERT INTO `departamento` (`id`, `descricao`) VALUES
 -- Estrutura para tabela `equipamento`
 --
 
-DROP TABLE IF EXISTS `equipamento`;
 CREATE TABLE `equipamento` (
   `id` int(11) NOT NULL,
   `descricao` varchar(35) NOT NULL,
@@ -64,7 +62,6 @@ CREATE TABLE `equipamento` (
 -- Estrutura para tabela `inventario`
 --
 
-DROP TABLE IF EXISTS `inventario`;
 CREATE TABLE `inventario` (
   `id` int(11) NOT NULL,
   `software` int(11) NOT NULL,
@@ -78,24 +75,22 @@ CREATE TABLE `inventario` (
 -- Estrutura para tabela `software`
 --
 
-DROP TABLE IF EXISTS `software`;
 CREATE TABLE `software` (
   `id` int(11) NOT NULL,
   `descricao` varchar(35) NOT NULL,
   `fabricante` varchar(25) NOT NULL,
   `tipo` int(11) NOT NULL,
   `valor` float NOT NULL,
-  `qtdecopias` int(11) NOT NULL
+  `qtdcopias` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tipospftware`
+-- Estrutura para tabela `tiposoftware`
 --
 
-DROP TABLE IF EXISTS `tipospftware`;
-CREATE TABLE `tipospftware` (
+CREATE TABLE `tiposoftware` (
   `id` int(11) NOT NULL,
   `descricao` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -133,9 +128,9 @@ ALTER TABLE `software`
   ADD KEY `tiposoftware_software` (`tipo`);
 
 --
--- Índices de tabela `tipospftware`
+-- Índices de tabela `tiposoftware`
 --
-ALTER TABLE `tipospftware`
+ALTER TABLE `tiposoftware`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -167,10 +162,10 @@ ALTER TABLE `software`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `tipospftware`
+-- AUTO_INCREMENT de tabela `tiposoftware`
 --
-ALTER TABLE `tipospftware`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tiposoftware`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para tabelas despejadas
@@ -193,7 +188,7 @@ ALTER TABLE `inventario`
 -- Restrições para tabelas `software`
 --
 ALTER TABLE `software`
-  ADD CONSTRAINT `tiposoftware_software` FOREIGN KEY (`tipo`) REFERENCES `tipospftware` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `tiposoftware_software` FOREIGN KEY (`tipo`) REFERENCES `tiposoftware` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
